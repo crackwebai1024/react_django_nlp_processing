@@ -1,40 +1,30 @@
-import PropTypes from "prop-types";
 import React, { Component } from "react";
-import "./Container.css"
-import {
-    Button,
-    Container,
-    Grid,
-    Header,
-    Icon,
-    Image,
-    Item,
-    Label,
-    Menu,
-    Segment,
-    Step,
-    Table,
-} from 'semantic-ui-react'
+import "./Container.css";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { usermove_nlp } from "../store/actions/user";
+import Category from "./Category.js";
+import ToolBox from "./ToolBox.js";
 
 class NlpDashboard extends Component {
-
-    move_to_nlpprocessing = e => {
-        var titleid = e.target.id;
-        var categoryid = e.currentTarget.value;
-        var page = "nlpprocessing";
-        this.props.move_nlp(page, titleid, categoryid);
-    }
-
     render() {
-        const { page, titleid, categoryid } = this.props;
-        if (page == "nlpprocessing") {
-            return <Redirect to="/nlpprocessing" />;
-        }
+        const { title } = this.props;
         return (
             <div>
+                <div style={{ height: 40 }}></div>
+
+                <div className="row wrapper">
+                    <div className="sidebar col-md-2">
+                        <div className="imground">
+                            <img src="embecia.png" className="emimage" />
+                        </div>
+                        <Category />
+                    </div>
+                    <div className="bodybar col-md-10">
+                        <div className="bodymargin">
+                            <h4 className="cattitle">{title}</h4>
+                        </div>
+                        <ToolBox />
+                    </div>
+                </div>
             </div>
         );
     }
@@ -42,19 +32,10 @@ class NlpDashboard extends Component {
 
 const mapStateToProps = state => {
     return {
-        page: state.user.page,
-        titleid: state.user.titleid,
-        categoryid: state.user.categoryid
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        move_nlp: (page, titleid, categoryid) => dispatch(usermove_nlp(page, titleid, categoryid))
+        title: state.user.title
     };
 };
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps, null
 )(NlpDashboard);

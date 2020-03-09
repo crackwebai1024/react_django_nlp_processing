@@ -1,10 +1,17 @@
 import * as actionTypes from "./actionTypes";
 
-export const usermove_nlp = (page, titleid, categoryid) => {
+export const user_item_tool = (titleid, category) => {
     return {
-        type: actionTypes.USER_MOVE_NLP,
-        page: page,
+        type: actionTypes.USER_ITEM,
         titleid: titleid,
-        categoryid: categoryid
+        category: category
     };
 };
+
+export const user_cat_tool = (title) => {
+    return {
+        type: actionTypes.USER_CAT,
+        title: title
+    };
+};
+
